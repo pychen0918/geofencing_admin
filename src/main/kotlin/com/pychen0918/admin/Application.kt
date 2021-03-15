@@ -21,10 +21,10 @@ fun Application.module() {
     }
     routing {
         static("dist"){
-            resources("temp/dist")
+            resources("dist")
         }
         static("plugins"){
-            resources("temp/plugins")
+            resources("plugins")
         }
         get("/"){
             call.respond(FreeMarkerContent("index.html", null, ""))
