@@ -16,7 +16,7 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
     install(FreeMarker){
-        templateLoader = ClassTemplateLoader(this::class.java.classLoader, "temp")
+        templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
         outputFormat = HTMLOutputFormat.INSTANCE
     }
     routing {
@@ -27,10 +27,10 @@ fun Application.module() {
             resources("plugins")
         }
         get("/"){
-            call.respond(FreeMarkerContent("index.html", null, ""))
+            call.respond(FreeMarkerContent("index.ftl", null, ""))
         }
         get("/{...}"){
-            call.respond(FreeMarkerContent(call.request.uri, null, ""))
+            call.respond(FreeMarkerContent(call.request.uri.replace(".html", ".ftl"), null, ""))
         }
     }
 }
