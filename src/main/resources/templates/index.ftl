@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<#import "sidebar.ftl" as sidebar>
 <html lang="zh-Hant-TW">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +17,6 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- Main Sidebar Container -->
-    <#import "sidebar.ftl" as sidebar>
     <@sidebar.mainSideBar/>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

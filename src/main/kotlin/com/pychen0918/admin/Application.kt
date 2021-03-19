@@ -11,10 +11,14 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.routing.get
+import io.ktor.serialization.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
+    install(ContentNegotiation) {
+        json()
+    }
     install(FreeMarker){
         templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
         outputFormat = HTMLOutputFormat.INSTANCE
@@ -28,6 +32,9 @@ fun Application.module() {
         }
         get("/"){
             call.respond(FreeMarkerContent("index.ftl", null, ""))
+        }
+        get("/points.html"){
+            call.respond(FreeMarkerContent("points.ftl", mapOf("points" to pointStorage), ""))
         }
         get("/{...}"){
             call.respond(FreeMarkerContent(call.request.uri.replace(".html", ".ftl"), null, ""))
